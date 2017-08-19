@@ -4,7 +4,7 @@
   "description": "A client to access Rajinikanth Facts Database (http://irkfdb.in/)",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/test.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "dependencies": {
     "http-build-query": "^0.1.1",
     "promise": "^8.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0"
   }
 }

@@ -34,6 +34,7 @@ var IrkfdbClient = {
         if (typeof categories === 'object') {
             this.limitFactsCategories = (this.limitFactsCategories).concat(categories);
         }
+        return this;
     },
 
     'excludeCategories': function (categories) {
@@ -86,31 +87,34 @@ var IrkfdbClient = {
 
     'makeApiCall': function () {
         var promise = new Promise(function (resolve, reject) {
-            http.get(IrkfdbClient.makeUrl(), function (res) {
-                var statusCode = res.statusCode;
-                if (statusCode !== 200) {
-                    reject(new Error('Request Failed.\n' + 'Status Code: statusCode' + statusCode))
-                } else {
-                    var body = "";
-                    res.on('data', function (chunk) {
-                        body += chunk;
-                    });
+            try {
+                http.get(IrkfdbClient.makeUrl(), function (res) {
+                    var statusCode = res.statusCode;
+                    if (statusCode !== 200) {
+                        reject(new Error('Request Failed.\n' + 'Status Code: statusCode' + statusCode))
+                    } else {
+                        var body = "";
+                        res.on('data', function (chunk) {
+                            body += chunk;
+                        });
+                        res.on('end', function () {
+                            try {
+                                body = JSON.parse(body);
+                                if (body.status === "OK") {
+                                    resolve(body);
+                                } else {
+                                    reject(body.message);
+                                }
 
-                    res.on('end', function () {
-                        try {
-                            body = JSON.parse(body);
-                            if (body.status === "OK") {
-                                resolve(body);
-                            } else {
-                                reject(body.message);
+                            } catch (e) {
+                                reject(e);
                             }
-
-                        } catch (e) {
-                            reject(e);
-                        }
-                    })
-                }
-            });
+                        })
+                    }
+                });
+            } catch (e) {
+                reject(e);
+            }
         });
         return promise;
     }

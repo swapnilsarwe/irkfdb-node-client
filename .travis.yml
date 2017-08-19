@@ -1,0 +1,20 @@
+# Required to run your project under the correct environment.
+language: node_js
+
+# Versions of PHP you want your project run with.
+node_js:
+  - 0.12
+  - 6.11
+
+# Commands to be run before your environment runs.
+before_script:
+  - npm install
+  - npm install -g mocha
+
+# Commands you want to run that will verify your build.
+script: npm run test
+
+# Customize when the notification emails are sent.
+notifications:
+    on_success: never
+    on_failure: always
