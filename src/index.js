@@ -98,12 +98,13 @@ var IrkfdbClient = {
 
                     res.on('end', function () {
                         try {
-                            console.log(body);
-                            console.log(body);
                             body = JSON.parse(body);
-                            console.log(body);
-                            console.log(body);
-                            resolve(body);
+                            if (body.status === "OK") {
+                                resolve(body);
+                            } else {
+                                reject(body.message);
+                            }
+
                         } catch (e) {
                             reject(e);
                         }
