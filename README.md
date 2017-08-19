@@ -1,4 +1,4 @@
-# irkfdb.in node client [![Build Status](https://travis-ci.org/irkfdb/irkfdb-php-client.svg?branch=master)](https://travis-ci.org/irkfdb/irkfdb-php-client)
+# irkfdb.in node client [![Build Status](https://travis-ci.org/irkfdb/irkfdb-node-client.svg?branch=master)](https://travis-ci.org/irkfdb/irkfdb-node-client)
 NodeJS API Client for the Internet Rajinikanth Facts Database. Its a wrapper class for the free database of Rajinikanth Facts hosted by irkfdb.in
 
 ## Install
