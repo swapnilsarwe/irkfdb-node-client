@@ -4,6 +4,7 @@ var http = require("http"),
 
 var IrkfdbClient = {
 
+    'that': this,
     'API_URL': 'http://api.irkfdb.in/facts/',
     'VERSION_NUMBER': '1.0',
     'API_TYPE': 'NODE_CLIENT',
@@ -19,8 +20,8 @@ var IrkfdbClient = {
 
     'setName': function (fName, lName) {
         if (fName.trim() !== '' && lName.trim() !== '') {
-            firstName = fName;
-            lastName = lName;
+            this.firstName = fName;
+            this.lastName = lName;
         } else {
             // TODO: Name are empty - throw appropriate exception
         }
@@ -28,54 +29,54 @@ var IrkfdbClient = {
 
     'fromCategories': function (categories) {
         if (typeof categories === 'string') {
-            limitFactsCategories = limitFactsCategories.concat(categories.split(","));
+            this.limitFactsCategories = (this.limitFactsCategories).concat(categories.split(","));
         }
         if (typeof categories === 'object') {
-            limitFactsCategories = limitFactsCategories.concat(categories);
+            this.limitFactsCategories = (this.limitFactsCategories).concat(categories);
         }
     },
 
     'excludeCategories': function (categories) {
         if (typeof categories === 'string') {
-            excludeFactsCategories = excludeFactsCategories.concat(categories.split(","));
+            this.excludeFactsCategories = (this.excludeFactsCategories).concat(categories.split(","));
         }
         if (typeof categories === 'object') {
-            excludeFactsCategories = excludeFactsCategories.concat(categories);
+            this.excludeFactsCategories = (this.excludeFactsCategories).concat(categories);
         }
     },
 
     'getRandomFact': function () {
-        isRandom = true;
-        return makeApiCall();
+        this.isRandom = true;
+        return this.makeApiCall();
     },
 
     'getCategories': function () {
-        categories = true;
-        return makeApiCall();
+        this.categories = true;
+        return this.makeApiCall();
     },
 
     'makeUrl': function () {
-        var apiCall = API_URL;
+        var apiCall = this.API_URL;
 
-        if (categories == true) {
+        if (this.categories == true) {
             return apiCall + 'categories';
         }
 
-        if (isRandom == true) {
+        if (this.isRandom == true) {
             apiCall += 'random';
         }
 
         var queryParams = {
-            'api_type': API_TYPE,
-            'version_number': VERSION_NUMBER
+            'api_type': this.API_TYPE,
+            'version_number': this.VERSION_NUMBER
         };
 
-        if (limitFactsCategories.length > 0) {
-            queryParams['limitFactsTo'] = limitFactsCategories.join(",");
+        if ((this.limitFactsCategories).length > 0) {
+            queryParams['limitFactsTo'] = (this.limitFactsCategories).join(",");
         }
 
-        if (excludeFactsCategories.length > 0) {
-            queryParams['excludeFactsFrom'] = excludeFactsCategories.join(",");
+        if ((this.excludeFactsCategories).length > 0) {
+            queryParams['excludeFactsFrom'] = (this.excludeFactsCategories).join(",");
         }
 
         var strParams = '?' + http_build_query(queryParams);
@@ -85,7 +86,7 @@ var IrkfdbClient = {
 
     'makeApiCall': function () {
         var promise = new Promise(function (resolve, reject) {
-            get(makeUrl(), function (err, res) {
+            get(that.makeUrl(), function (err, res) {
                 if (err) reject(err);
                 else resolve(res);
             });
