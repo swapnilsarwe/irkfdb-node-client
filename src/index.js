@@ -86,7 +86,7 @@ var IrkfdbClient = {
 
     'makeApiCall': function () {
         var promise = new Promise(function (resolve, reject) {
-            http.get(that.makeUrl(), function (res) {
+            http.get(IrkfdbClient.makeUrl(), function (res) {
                 var statusCode = res.statusCode;
                 if (statusCode !== 200) {
                     reject(new Error('Request Failed.\n' + 'Status Code: statusCode' + statusCode))
