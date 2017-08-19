@@ -1,38 +1,34 @@
 # irkfdb.in node client [![Build Status](https://travis-ci.org/irkfdb/irkfdb-php-client.svg?branch=master)](https://travis-ci.org/irkfdb/irkfdb-php-client)
-PHP API Client for the Internet Rajinikanth Facts Database. Its a wrapper class for the free database of Rajinikanth Facts hosted by irkfdb.in
+NodeJS API Client for the Internet Rajinikanth Facts Database. Its a wrapper class for the free database of Rajinikanth Facts hosted by irkfdb.in
 
 ## Install
-Using Composer
+Using npm
 
 ```
-composer require irkfdb/irkfdb-php-client
+npm install irkfdb-node-client
 ```
 
 ## Usage
 To get the categories
 ```
-require_once "vendor/autoload.php";
+var irkfdb = require('irkfdb-node-client')
 
-use Irkfdb\IrkfdbClient;
-
-$irkfdbClient = new IrkfdbClient();
-$irkfdbClient->getCategories()
+irkfdb.getCategories().then(function (data) {
+   console.log(data);
+});
 ```
 
 Sample Response
-```
-Array
-(
-    [status] => OK
-    [resultSet] => Array
-        (
-            [data] => Array
-                (
-                    [0] => nsfw
-                    [1] => geeky
-                )
-        )
-)
+```json
+{
+  status: 'OK',
+  resultSet:
+   { data:
+      [ 'nsfw',
+        'geeky'
+      ]
+   }
+}
 ```
 
 In case of API failure, the response would be as follows
@@ -43,65 +39,73 @@ Array
     [status] => FAIL
     [errMessage] => '<err message>'
 )
+{
+  status: 'FAIL',
+  errMessage: '<err message>'
+}
 ```
 
 To get the random fact
 ```
-$irkfdbClient = new IrkfdbClient();
-$irkfdbClient->getRandomFact()
+var irkfdb = require('irkfdb-node-client')
+
+irkfdb.getRandomFact().then(function (data) {
+   console.log(data);
+});
 ```
 
 Sample Response
-```
-Array
-(
-    [status] => OK
-    [resultSet] => Array
-        (
-            [data] => Array
-                (
-                    [0] => Array
-                        (
-                            [hash_id] => 9a004def16176d9a2b258a15bf898119
-                            [db_id] => 426
-                            [fact] => Rajinikanth writes code that optimizes itself.
-                            [categories] => Array
-                                (
-                                    [0] => geeky
-                                )
-                            [sources] => Array
-                                (
-                                    [0] => api.icndb.com
-                                    [1] => raw.githubusercontent.com/jenkinsci
-                                )
-                        )
-                )
-
-            [total_facts] => 9361
-        )
-)
+```json
+{
+    "status": "OK",
+    "resultSet": {
+        "data": [{
+            "hash_id": "42e9f7c05e6b04bd9bc137ef10e0d86e",
+            "db_id": 522,
+            "fact": "Rajinikanth can over-write a locked variable.",
+            "categories": ["geeky"],
+            "sources": ["api.icndb.com"]
+        }],
+        "total_facts": 100
+    }
+}
 ```
 
 To get the random fact from the selected category/categories
-```
-$irkfdbClient = new IrkfdbClient();
+```json
+var irkfdb = require('irkfdb-node-client')
+
 // random fact belonging to one category
-$irkfdbClient->fromCategories('geeky')->getRandomFact();
+irkfdb.fromCategories('geeky').getRandomFact().then(function (data) {
+    console.log(data);
+});
 
 //or for multiple categories
-$irkfdbClient->fromCategories('nsfw,geeky')->getRandomFact();
-or
-$irkfdbClient->fromCategories(['nsfw','geeky'])->getRandomFact();
+irkfdb.fromCategories('nsfw,geeky').getRandomFact().then(function (data) {
+    console.log(data);
+});
+// OR
+irkfdb.fromCategories(['nsfw','geeky']).getRandomFact().then(function (data) {
+    console.log(data);
+});
+
 ```
 
 To exclude the fact from the particular category/categories
 ```
-$irkfdbClient = new IrkfdbClient();
-// random fact belonging to one category
-$irkfdbClient->excludeCategories('geeky')->getRandomFact();
+var irkfdb = require('irkfdb-node-client')
+
+// random fact not belonging to one category
+irkfdb.excludeCategories('geeky').getRandomFact().then(function (data) {
+    console.log(data);
+});
 
 //or for multiple categories
-$irkfdbClient->excludeCategories('nsfw,geeky')->getRandomFact();
-or
-$irkfdbClient->excludeCategories(['nsfw','geeky'])->getRandomFact();
+irkfdb.excludeCategories('nsfw,geeky').getRandomFact().then(function (data) {
+    console.log(data);
+});
+// OR
+irkfdb.excludeCategories(['nsfw','geeky']).getRandomFact().then(function (data) {
+    console.log(data);
+});
 ```

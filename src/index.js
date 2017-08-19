@@ -25,6 +25,7 @@ var IrkfdbClient = {
         } else {
             // TODO: Name are empty - throw appropriate exception
         }
+        return this;
     },
 
     'fromCategories': function (categories) {
@@ -44,6 +45,7 @@ var IrkfdbClient = {
         if (typeof categories === 'object') {
             this.excludeFactsCategories = (this.excludeFactsCategories).concat(categories);
         }
+        return this;
     },
 
     'getRandomFact': function () {
