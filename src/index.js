@@ -86,9 +86,24 @@ var IrkfdbClient = {
 
     'makeApiCall': function () {
         var promise = new Promise(function (resolve, reject) {
-            get(that.makeUrl(), function (err, res) {
-                if (err) reject(err);
-                else resolve(res);
+            http.get(that.makeUrl(), function (res) {
+                var statusCode = res.statusCode;
+                if (statusCode !== 200) {
+                    reject(new Error('Request Failed.\n' + 'Status Code: statusCode' + statusCode))
+                } else {
+                    var body = "";
+                    res.on('data', function (chunk) {
+                        body += chunk;
+                    });
+
+                    res.on('end', function () {
+                        try {
+                            resolve(body);
+                        } catch (e) {
+                            reject(e);
+                        }
+                    })
+                }
             });
         });
         return promise;
