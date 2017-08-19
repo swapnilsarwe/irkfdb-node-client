@@ -2,7 +2,7 @@
   "name": "irkfdb-node-client",
   "version": "1.0.1",
   "description": "A client to access Rajinikanth Facts Database (http://irkfdb.in/)",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,9 @@
     "rajinifacts"
   ],
   "author": "irkfdb.in",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-build-query": "^0.1.1",
+    "promise": "^8.0.1"
+  }
 }
