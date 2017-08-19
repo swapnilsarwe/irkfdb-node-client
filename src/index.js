@@ -92,6 +92,10 @@ function IrkfdbClient() {
         });
         return promise;
     }
+
+    return {
+        'getRandomFact': getRandomFact()
+    }
 }
 
 module.exports = IrkfdbClient;
