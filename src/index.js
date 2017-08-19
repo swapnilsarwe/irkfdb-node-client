@@ -2,59 +2,59 @@ var http = require("http"),
     Promise = require("promise"),
     http_build_query = require('http-build-query');
 
-function IrkfdbClient() {
+var IrkfdbClient = {
 
-    const API_URL = 'http://api.irkfdb.in/facts/';
-    const VERSION_NUMBER = '1.0';
-    const API_TYPE = 'NODE_CLIENT';
+    'API_URL': 'http://api.irkfdb.in/facts/',
+    'VERSION_NUMBER': '1.0',
+    'API_TYPE': 'NODE_CLIENT',
 
-    var firstName,
-        lastName;
+    'firstName': '',
+    'lastName': '',
 
-    var categories,
-        limitFactsCategories = [],
-        excludeFactsCategories = [];
+    'categories': false,
+    'limitFactsCategories': [],
+    'excludeFactsCategories': [],
 
-    var isRandom;
+    'isRandom': false,
 
-    function setName(fName, lName) {
+    'setName': function (fName, lName) {
         if (fName.trim() !== '' && lName.trim() !== '') {
             firstName = fName;
             lastName = lName;
         } else {
             // TODO: Name are empty - throw appropriate exception
         }
-    }
+    },
 
-    function fromCategories(categories) {
+    'fromCategories': function (categories) {
         if (typeof categories === 'string') {
             limitFactsCategories = limitFactsCategories.concat(categories.split(","));
         }
         if (typeof categories === 'object') {
             limitFactsCategories = limitFactsCategories.concat(categories);
         }
-    }
+    },
 
-    function excludeCategories(categories) {
+    'excludeCategories': function (categories) {
         if (typeof categories === 'string') {
             excludeFactsCategories = excludeFactsCategories.concat(categories.split(","));
         }
         if (typeof categories === 'object') {
             excludeFactsCategories = excludeFactsCategories.concat(categories);
         }
-    }
+    },
 
-    function getRandomFact() {
+    'getRandomFact': function () {
         isRandom = true;
         return makeApiCall();
-    }
+    },
 
-    function getCategories() {
+    'getCategories': function () {
         categories = true;
         return makeApiCall();
-    }
+    },
 
-    function makeUrl() {
+    'makeUrl': function () {
         var apiCall = API_URL;
 
         if (categories == true) {
@@ -81,9 +81,9 @@ function IrkfdbClient() {
         var strParams = '?' + http_build_query(queryParams);
 
         return apiCall + strParams;
-    }
+    },
 
-    function makeApiCall() {
+    'makeApiCall': function () {
         var promise = new Promise(function (resolve, reject) {
             get(makeUrl(), function (err, res) {
                 if (err) reject(err);
@@ -92,10 +92,6 @@ function IrkfdbClient() {
         });
         return promise;
     }
-
-    return {
-        'getRandomFact': getRandomFact()
-    }
-}
+};
 
 module.exports = IrkfdbClient;
