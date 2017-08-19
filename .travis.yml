@@ -3,7 +3,6 @@ language: node_js
 
 # Versions of PHP you want your project run with.
 node_js:
-  - 0.12
   - 6.11
 
 # Commands to be run before your environment runs.
