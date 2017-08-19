@@ -33,12 +33,7 @@ Sample Response
 
 In case of API failure, the response would be as follows
 Sample Response
-```
-Array
-(
-    [status] => FAIL
-    [errMessage] => '<err message>'
-)
+```json
 {
   status: 'FAIL',
   errMessage: '<err message>'
@@ -72,7 +67,7 @@ Sample Response
 ```
 
 To get the random fact from the selected category/categories
-```json
+```
 var irkfdb = require('irkfdb-node-client')
 
 // random fact belonging to one category
