@@ -1,6 +1,6 @@
 {
   "name": "irkfdb-node-client",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A client to access Rajinikanth Facts Database (http://irkfdb.in/)",
   "main": "src/index.js",
   "scripts": {
