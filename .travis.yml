@@ -7,6 +7,8 @@ node_js:
 
 # Commands to be run before your environment runs.
 before_script:
+  - npm install -g npm@latest
+  - npm -v
   - npm install
   - npm install -g mocha
 
