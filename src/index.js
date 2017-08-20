@@ -61,18 +61,18 @@ var IrkfdbClient = {
     'makeUrl': function () {
         var apiCall = this.API_URL;
 
+        var queryParams = {
+            'api_type': this.API_TYPE,
+            'version_number': this.VERSION_NUMBER
+        };
+
         if (this.categories == true) {
-            return apiCall + 'categories';
+            return apiCall + 'categories' + '?' + http_build_query(queryParams);
         }
 
         if (this.isRandom == true) {
             apiCall += 'random';
         }
-
-        var queryParams = {
-            'api_type': this.API_TYPE,
-            'version_number': this.VERSION_NUMBER
-        };
 
         if ((this.limitFactsCategories).length > 0) {
             queryParams['limitFactsTo'] = (this.limitFactsCategories).join(",");
