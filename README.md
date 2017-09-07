@@ -21,11 +21,11 @@ irkfdb.getCategories().then(function (data) {
 Sample Response
 ```json
 {
-  status: 'OK',
-  resultSet:
-   { data:
-      [ 'nsfw',
-        'geeky'
+  "status": "OK",
+  "resultSet":
+   { "data":
+      [ "nsfw",
+        "geeky"
       ]
    }
 }
@@ -35,8 +35,8 @@ In case of API failure, the response would be as follows
 Sample Response
 ```json
 {
-  status: 'FAIL',
-  errMessage: '<err message>'
+  "status": "FAIL",
+  "errMessage": "<err message>"
 }
 ```
 
