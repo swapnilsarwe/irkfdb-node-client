@@ -10,7 +10,7 @@ npm install irkfdb-node-client
 
 ## Usage
 To get the categories
-```
+```javascript
 var irkfdb = require('irkfdb-node-client')
 
 irkfdb.getCategories().then(function (data) {
@@ -41,7 +41,7 @@ Sample Response
 ```
 
 To get the random fact
-```
+```javascript
 var irkfdb = require('irkfdb-node-client')
 
 irkfdb.getRandomFact().then(function (data) {
@@ -67,7 +67,7 @@ Sample Response
 ```
 
 To get the random fact from the selected category/categories
-```
+```javascript
 var irkfdb = require('irkfdb-node-client')
 
 // random fact belonging to one category
@@ -87,7 +87,7 @@ irkfdb.fromCategories(['nsfw','geeky']).getRandomFact().then(function (data) {
 ```
 
 To exclude the fact from the particular category/categories
-```
+```javascript
 var irkfdb = require('irkfdb-node-client')
 
 // random fact not belonging to one category
